@@ -26,6 +26,6 @@ setuptools.setup(
     install_requires=[
         "requests",
         "python-dateutil",
-        "outcache"
+        "OutCache"
     ]
 )
