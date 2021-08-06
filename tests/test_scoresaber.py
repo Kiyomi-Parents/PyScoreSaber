@@ -1,6 +1,7 @@
 import unittest
 
-from src.pyscoresaber import ScoreSaber, NotFoundException
+from src.pyscoresaber import NotFoundException
+from src.pyscoresaber.scoresaber import ScoreSaber
 
 
 class TestScoreSaber(unittest.TestCase):

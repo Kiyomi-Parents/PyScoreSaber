@@ -3,8 +3,8 @@ from typing import List, Optional
 
 from dataclasses_json import dataclass_json
 
-from pyscoresaber.models.fields import default
-from pyscoresaber.models.score_stats import ScoreStats
+from .fields import default
+from .score_stats import ScoreStats
 
 
 @dataclass_json

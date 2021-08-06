@@ -3,7 +3,7 @@ from datetime import datetime
 
 from dataclasses_json import dataclass_json
 
-from pyscoresaber.models.fields import datetime_field, default
+from .fields import datetime_field, default
 
 
 @dataclass_json
