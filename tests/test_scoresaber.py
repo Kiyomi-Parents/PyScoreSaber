@@ -10,12 +10,19 @@ class TestScoreSaber(unittest.TestCase):
     def setUp(self):
         self.scoresaber = ScoreSaber()
 
-    def test_get_player_valid(self):
-        player = self.scoresaber.get_player(self.valid_player_id)
-        self.assertTrue(player.playerId == self.valid_player_id)
+    def test_get_player_basic_valid(self):
+        player = self.scoresaber.get_player_basic(self.valid_player_id)
+        self.assertTrue(player.player_id == self.valid_player_id)
 
-    def test_get_player_invalid(self):
-        self.assertRaises(NotFoundException, self.scoresaber.get_player, self.invalid_player_id)
+    def test_get_player_basic_invalid(self):
+        self.assertRaises(NotFoundException, self.scoresaber.get_player_basic, self.invalid_player_id)
+
+    def test_get_player_full_valid(self):
+        player = self.scoresaber.get_player_full(self.valid_player_id)
+        self.assertTrue(player.player_id == self.valid_player_id)
+
+    def test_get_player_full_invalid(self):
+        self.assertRaises(NotFoundException, self.scoresaber.get_player_full, self.invalid_player_id)
 
     def test_get_recent_scores_valid(self):
         scores = self.scoresaber.get_recent_scores(self.valid_player_id)

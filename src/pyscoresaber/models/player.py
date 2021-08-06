@@ -1,21 +1,29 @@
+from dataclasses import dataclass
+from typing import List, Optional
+
+from dataclasses_json import dataclass_json
+
+from pyscoresaber.models.fields import default
+from pyscoresaber.models.score_stats import ScoreStats
+
+
+@dataclass_json
+@dataclass
 class Player:
     """Player data from ScoreSaber"""
 
-    def __init__(self, player_json):
-        self.playerId = player_json["playerId"]
-        self.playerName = player_json["playerName"]
-        self.avatar = player_json["avatar"]
-        self.rank = player_json["rank"]
-        self.countryRank = player_json["countryRank"]
-        self.pp = player_json["pp"]
-        self.country = player_json["country"]
-        self.role = player_json["role"]
-        self.badges = player_json["badges"]
-        self.history = player_json["history"]
-        self.permissions = player_json["permissions"]
-        self.inactive = player_json["inactive"]
-        self.banned = player_json["banned"]
-        self.discord_user_id = None
+    player_id: str = default("playerId")
+    player_name: str = default("playerName")
+    avatar: str = default()
+    rank: int = default()
+    country_rank: int = default("countryRank")
+    pp: float = default()
+    country: str = default()
+    role: str = default()
+    badges: List[str] = default()
+    history: str = default()
+    permissions: int = default()
+    inactive: int = default()
+    banned: int = default()
 
-    def __str__(self):
-        return f"Player {self.playerName} ({self.playerId})"
+    score_stats: Optional[ScoreStats] = default("scoreStats")
