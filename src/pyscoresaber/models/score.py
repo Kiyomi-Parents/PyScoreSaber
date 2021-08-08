@@ -3,7 +3,8 @@ from datetime import datetime
 
 from dataclasses_json import dataclass_json
 
-from .fields import datetime_field, default
+from .enum import Characteristic, Difficulty
+from .fields import datetime_field, default, characteristic_field, difficulty_field
 
 
 @dataclass_json
@@ -25,6 +26,6 @@ class Score:
     song_sub_name: str = default("songSubName")
     song_author_name: str = default("songAuthorName")
     level_author_name: str = default("levelAuthorName")
-    difficulty: int = default()
-    difficulty_raw: str = default("difficultyRaw")
+    characteristic: Characteristic = characteristic_field("difficultyRaw")
+    difficulty: Difficulty = difficulty_field("difficulty")
     max_score: int = default("maxScore")
