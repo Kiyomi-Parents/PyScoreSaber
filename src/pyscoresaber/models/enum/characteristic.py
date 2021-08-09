@@ -3,9 +3,9 @@ from enum import Enum
 
 class Characteristic(Enum):
     STANDARD = "Standard"
-    ONESABER = "OneSaber"
-    NOARROWS = "NoArrows"
-    _90DEGREE = "_90Degree"
-    _360DEGREE = "_360Degree"
+    ONE_SABER = "OneSaber"
+    NO_ARROWS = "NoArrows"
+    _90_DEGREE = "90Degree"
+    _360_DEGREE = "360Degree"
     LIGHTSHOW = "Lightshow"
     LAWLESS = "Lawless"
