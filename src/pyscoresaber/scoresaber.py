@@ -3,7 +3,7 @@ from json.decoder import JSONDecodeError
 from typing import List, Dict
 
 import requests
-from outcache import Cache
+from outcache import CacheAsync
 
 from .models import Player, Score
 from .common import Common
@@ -16,8 +16,8 @@ class ScoreSaber:
     def __init__(self):
         self.log = logging.getLogger(__name__)
 
-    def _process_url(self, url: str) -> Dict:
-        response = Common.request(requests.get, url, timeout=self.TIMEOUT)
+    async def _process_url(self, url: str) -> Dict:
+        response = await Common.request(requests.get, url, timeout=self.TIMEOUT)
 
         try:
             data = response.json()
@@ -27,30 +27,30 @@ class ScoreSaber:
 
         return data
 
-    @Cache(minutes=2)
-    def _get_player_basic(self, player_id: str) -> Dict:
-        return self._process_url(f"{self._url}/player/{player_id}/basic")
+    @CacheAsync(minutes=2)
+    async def _get_player_basic(self, player_id: str) -> Dict:
+        return await self._process_url(f"{self._url}/player/{player_id}/basic")
 
-    def get_player_basic(self, player_id: str) -> Player:
-        response = self._get_player_basic(player_id)
-
-        return Player.from_dict(response["playerInfo"])
-
-    @Cache(minutes=2)
-    def _get_player_full(self, player_id: str) -> Dict:
-        return self._process_url(f"{self._url}/player/{player_id}/full")
-
-    def get_player_full(self, player_id: str) -> Player:
-        response = self._get_player_full(player_id)
+    async def get_player_basic(self, player_id: str) -> Player:
+        response = await self._get_player_basic(player_id)
 
         return Player.from_dict(response["playerInfo"])
 
-    @Cache(minutes=2)
-    def _get_recent_scores(self, player_id: str, page: int = 1) -> Dict:
-        return self._process_url(f"{self._url}/player/{player_id}/scores/recent/{page}")
+    @CacheAsync(minutes=2)
+    async def _get_player_full(self, player_id: str) -> Dict:
+        return await self._process_url(f"{self._url}/player/{player_id}/full")
 
-    def get_recent_scores(self, player_id: str, page: int = 1) -> List[Score]:
-        response = self._get_recent_scores(player_id, page)
+    async def get_player_full(self, player_id: str) -> Player:
+        response = await self._get_player_full(player_id)
+
+        return Player.from_dict(response["playerInfo"])
+
+    @CacheAsync(minutes=2)
+    async def _get_recent_scores(self, player_id: str, page: int = 1) -> Dict:
+        return await self._process_url(f"{self._url}/player/{player_id}/scores/recent/{page}")
+
+    async def get_recent_scores(self, player_id: str, page: int = 1) -> List[Score]:
+        response = await self._get_recent_scores(player_id, page)
 
         recent_score_list = []
 
@@ -59,12 +59,12 @@ class ScoreSaber:
 
         return recent_score_list
 
-    @Cache(minutes=2)
-    def _get_top_scores(self, player_id: str, page: int = 1) -> Dict:
-        return self._process_url(f"{self._url}/player/{player_id}/scores/top/{page}")
+    @CacheAsync(minutes=2)
+    async def _get_top_scores(self, player_id: str, page: int = 1) -> Dict:
+        return await self._process_url(f"{self._url}/player/{player_id}/scores/top/{page}")
 
-    def get_top_scores(self, player_id: str, page: int = 1) -> List[Score]:
-        response = self._get_top_scores(player_id, page)
+    async def get_top_scores(self, player_id: str, page: int = 1) -> List[Score]:
+        response = await self._get_top_scores(player_id, page)
 
         top_score_list = []
 
