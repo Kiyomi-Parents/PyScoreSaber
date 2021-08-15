@@ -41,8 +41,8 @@ def characteristic_decoder(value: any) -> Characteristic:
     res = value[1:].split("_")[1].replace("Solo", "")
 
     # Some weird "StandardHM" characteristic that doesnt exist anymore
-    if "HM" in res:
-        res.replace("HM", "")
+    if "Standard" in res:
+        return Characteristic.STANDARD
 
     return Characteristic(res)
 

@@ -50,8 +50,8 @@ class TestScoreSaber(IsolatedAsyncioTestCase):
             await self.scoresaber.get_top_scores(self.invalid_player_id, 2)
 
     async def test_get_top_scores_invalid_page(self):
-        scores_1 = await self.scoresaber.get_top_scores(self.valid_player_id, 1)
-        self.assertGreater(len(scores_1), 0)
+        scores_1 = await self.scoresaber.get_recent_scores(self.valid_player_id, 248)
+        self.assertGreater(len(scores_1), 7)
 
         with self.assertRaises(NotFoundException):
             await self.scoresaber.get_top_scores(self.valid_player_id, 12412312)
