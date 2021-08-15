@@ -60,10 +60,10 @@ class ScoreSaber:
         return recent_score_list
 
     @Cache(minutes=2)
-    def _get_top_scores(self, player_id, page: int = 1) -> Dict:
+    def _get_top_scores(self, player_id: str, page: int = 1) -> Dict:
         return self._process_url(f"{self._url}/player/{player_id}/scores/top/{page}")
 
-    def get_top_scores(self, player_id, page: int = 1) -> List[Score]:
+    def get_top_scores(self, player_id: str, page: int = 1) -> List[Score]:
         response = self._get_top_scores(player_id, page)
 
         top_score_list = []

@@ -43,3 +43,10 @@ class TestScoreSaber(unittest.TestCase):
         self.assertRaises(NotFoundException, self.scoresaber.get_top_scores, self.invalid_player_id, 1)
 
         self.assertRaises(NotFoundException, self.scoresaber.get_top_scores, self.invalid_player_id, 2)
+
+    def test_get_top_scores_invalid_page(self):
+        scores_1 = self.scoresaber.get_top_scores(self.valid_player_id, 1)
+        self.assertGreater(len(scores_1), 0)
+
+        self.assertRaises(NotFoundException, self.scoresaber.get_top_scores, self.valid_player_id, 12412312)
+
