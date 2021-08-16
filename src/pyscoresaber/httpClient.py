@@ -64,14 +64,14 @@ class HttpClient:
                 return result
             except ServerErrorException as error:
                 attempt += 1
-                logging.info(str(error))
-                logging.info(f"Waiting {self.WAIT_SERVER_ERROR} seconds...")
+                logging.warning(str(error))
+                logging.warning(f"Waiting {self.WAIT_SERVER_ERROR} seconds...")
                 last_exception = error
                 await asyncio.sleep(self.WAIT_SERVER_ERROR)
             except RateLimitedException as error:
                 attempt += 1
-                logging.info(str(error))
-                logging.info(f"Waiting {self.WAIT_RATE_LIMIT} seconds...")
+                logging.warning(str(error))
+                logging.warning(f"Waiting {self.WAIT_RATE_LIMIT} seconds...")
                 last_exception = error
                 await asyncio.sleep(self.WAIT_RATE_LIMIT)
 
