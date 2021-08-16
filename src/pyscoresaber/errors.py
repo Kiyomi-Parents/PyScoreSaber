@@ -5,7 +5,7 @@ class APIException(Exception):
         if message is not None:
             self.message = message
         else:
-            self.message = f"Got HTTP status code {response.status_code} for {response.url}"
+            self.message = f"Got HTTP status code {response.status} for {response.url}"
 
         super().__init__(self.message)
 
