@@ -19,7 +19,7 @@ class Player:
     country_rank: int = default("countryRank")
     pp: float = default()
     country: str = default()
-    role: str = default()
+    role: Optional[str] = default()
     badges: List[str] = default()
     history: str = default()
     permissions: int = default()
