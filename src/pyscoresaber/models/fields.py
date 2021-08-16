@@ -44,7 +44,10 @@ def characteristic_decoder(value: any) -> Characteristic:
     if "Standard" in res:
         return Characteristic.STANDARD
 
-    return Characteristic(res)
+    if Characteristic.has_value(res):
+        return Characteristic(res)
+
+    return Characteristic.UNKNOWN
 
 
 def characteristic_encoder(characteristic: Characteristic) -> str:
@@ -63,7 +66,10 @@ def characteristic_field(json_field_name: Optional[str] = None) -> Field:
 
 
 def difficulty_decoder(value: any) -> Difficulty:
-    return Difficulty(value)
+    if Difficulty.has_value(value):
+        return Difficulty(value)
+
+    return Difficulty.UNKNOWN
 
 
 def difficulty_encoder(difficulty: Difficulty) -> int:

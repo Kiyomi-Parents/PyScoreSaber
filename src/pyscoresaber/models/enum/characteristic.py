@@ -1,7 +1,7 @@
-from enum import Enum
+from .base_enum import BaseEnum
 
 
-class Characteristic(Enum):
+class Characteristic(BaseEnum):
     STANDARD = "Standard"
     ONE_SABER = "OneSaber"
     NO_ARROWS = "NoArrows"
@@ -9,3 +9,4 @@ class Characteristic(Enum):
     DEGREE_360 = "360Degree"
     LIGHTSHOW = "Lightshow"
     LAWLESS = "Lawless"
+    UNKNOWN = "Unknown"
