@@ -1,7 +1,6 @@
 from unittest import IsolatedAsyncioTestCase
 
-from src.pyscoresaber import NotFoundException
-from src.pyscoresaber.scoresaber import ScoreSaber
+from src.pyscoresaber import ScoreSaber, NotFoundException
 
 
 class TestScoreSaber(IsolatedAsyncioTestCase):
