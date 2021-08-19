@@ -3,6 +3,7 @@ from typing import List, Optional
 
 from dataclasses_json import dataclass_json
 
+from .badge import Badge
 from .fields import default
 from .score_stats import ScoreStats
 
@@ -20,7 +21,7 @@ class Player:
     pp: float = default()
     country: str = default()
     role: Optional[str] = default()
-    badges: List[str] = default()
+    badges: List[Badge] = default()
     history: str = default()
     permissions: int = default()
     inactive: int = default()

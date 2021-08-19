@@ -38,6 +38,9 @@ def datetime_field(json_field_name: Optional[str] = None) -> Field:
 
 
 def characteristic_decoder(value: any) -> Characteristic:
+    if Characteristic.has_value(value):
+        return Characteristic(value)
+
     res = value[1:].split("_")[1].replace("Solo", "")
 
     # Some weird "StandardHM" characteristic that doesnt exist anymore
@@ -51,7 +54,7 @@ def characteristic_decoder(value: any) -> Characteristic:
 
 
 def characteristic_encoder(characteristic: Characteristic) -> str:
-    return characteristic.value
+    return characteristic[0].value
 
 
 def characteristic_field(json_field_name: Optional[str] = None) -> Field:
@@ -73,7 +76,7 @@ def difficulty_decoder(value: any) -> Difficulty:
 
 
 def difficulty_encoder(difficulty: Difficulty) -> int:
-    return difficulty.value
+    return difficulty[0].value
 
 
 def difficulty_field(json_field_name: Optional[str] = None) -> Field:
