@@ -1,79 +1,45 @@
 import asyncio
 import logging
-from json import JSONDecodeError
 
 import aiohttp
+from aiohttp import ClientResponse, ClientResponseError
 
-from .errors import RateLimitedException, NotFoundException, ServerErrorException
+from .errors import ScoreSaberException, NotFoundException, ServerException
 
 
-class HttpClient:
-    WAIT_RATE_LIMIT = 60
-    WAIT_SERVER_ERROR = 5
+class HttpClient(aiohttp.ClientSession):
+    RETRIES = 10
 
-    def __init__(self):
-        self.__session = None
+    def __init__(self, *args, **kwargs):
+        super().__init__(raise_for_status=True, *args, **kwargs)
 
-    async def start(self):
-        if self.__session is None:
-            self.__session = aiohttp.ClientSession()
+    async def _request(self, *args, **kwargs) -> ClientResponse:
+        retries = 0
 
-    async def close(self):
-        if self.__session:
-            await self.__session.close()
-
-    async def request(self, method, url, **kwargs):
-        async def attempt():
-            async with self.__session.request(method, url, **kwargs) as response:
-                self.verify_response(response)
-                return await self.get_json(response)
-
-        return await self.request_attempt(attempt)
-
-    @staticmethod
-    async def get_json(response):
-        try:
-            data = await response.json()
-        except JSONDecodeError:
-            logging.exception("JSONDecodeError, response: %r, response.text: %r", response, response.text)
-            data = {"error": "Failed to decode json from scoresaber. Somethings broken."}
-
-        return data
-
-    @staticmethod
-    def verify_response(response):
-        if response.status == 429:
-            raise RateLimitedException(response)
-
-        if 400 <= response.status < 500:
-            raise NotFoundException(response)
-
-        if 500 <= response.status < 600:
-            raise ServerErrorException(response)
-
-    async def request_attempt(self, func):
-        attempt = 0
-        attempting = True
-        last_exception = None
-
-        while attempting and attempt < 6:
+        while True:
             try:
-                result = await func()
+                response = await super()._request(*args, **kwargs)
+            except ClientResponseError as error:
+                if error.status == 404:
+                    raise NotFoundException(error.status, str(error.request_info.real_url)) from error
+                elif error.status == 500:
+                    raise ServerException(error.status, str(error.request_info.real_url)) from error
 
-                attempting = False
-                return result
-            except ServerErrorException as error:
-                attempt += 1
-                logging.warning(str(error))
-                logging.warning(f"Waiting {self.WAIT_SERVER_ERROR} seconds...")
-                last_exception = error
-                await asyncio.sleep(self.WAIT_SERVER_ERROR)
-            except RateLimitedException as error:
-                attempt += 1
-                logging.warning(str(error))
-                logging.warning(f"Waiting {self.WAIT_RATE_LIMIT} seconds...")
-                last_exception = error
-                await asyncio.sleep(self.WAIT_RATE_LIMIT)
+                raise ScoreSaberException(error.status, str(error.request_info.real_url)) from error
 
-        if last_exception is not None:
-            raise last_exception
+            if response.status == 200:
+                return response
+
+            if retries > self.RETRIES:
+                raise ScoreSaberException(response.status, str(response.real_url))
+
+            sleep = 2 ** retries
+
+            logging.warning(f"[{retries}/{self.RETRIES}] Ratelimited! Waiting {sleep} seconds...")
+            await asyncio.sleep(sleep)
+
+            retries += 1
+
+    async def get(self, url, *args, **kwargs):
+        response = await self._request('GET', url, *args, **kwargs)
+        return await response.json()

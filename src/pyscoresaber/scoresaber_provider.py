@@ -46,10 +46,10 @@ class ScoreSaberProvider(BaseProvider):
 
         return badges
 
-    def player_basic(self) -> Player:
+    def player_basic(self, player_id: int) -> Player:
         player = Player()
 
-        player.player_id = self.random_number(self.random_int(16, 17), True)
+        player.player_id = player_id
         player.player_name = self.generator.user_name()
         player.avatar = self.generator.image_url(184, 184)
         player.rank = self.rank()
@@ -76,8 +76,8 @@ class ScoreSaberProvider(BaseProvider):
 
         return score_stats
 
-    def player_full(self) -> Player:
-        player = self.player_basic()
+    def player_full(self, player_id: int) -> Player:
+        player = self.player_basic(player_id)
 
         player.score_stats = self.score_stats()
 
