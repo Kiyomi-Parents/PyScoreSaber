@@ -35,7 +35,7 @@ class HttpClient(aiohttp.ClientSession):
 
             sleep = 2 ** retries
 
-            logging.warning(f"[{retries}/{self.RETRIES}] Ratelimited! Waiting {sleep} seconds...")
+            logging.warning(f"[{retries}/{self.RETRIES}] Rate limited! Waiting {sleep} seconds...")
             await asyncio.sleep(sleep)
 
             retries += 1
