@@ -90,3 +90,10 @@ class ScoreSaber:
             top_score_list.append(Score.from_dict(top_score))
 
         return top_score_list
+
+    async def __aenter__(self):
+        await self.start()
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        await self.close()
