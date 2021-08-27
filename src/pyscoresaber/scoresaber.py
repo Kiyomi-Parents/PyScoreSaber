@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from asyncio import AbstractEventLoop
 from typing import *
@@ -14,7 +15,7 @@ class ScoreSaber:
     _url = "https://new.scoresaber.com/api"
 
     def __init__(self, loop: Optional[AbstractEventLoop] = None, test_mode: bool = False):
-        self.loop = loop
+        self.loop = loop if loop is not None else asyncio.get_event_loop()
         self.test_mode = test_mode
 
         self.log = logging.getLogger(__name__)
