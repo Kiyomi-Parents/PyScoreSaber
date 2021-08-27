@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import *
 
 from faker.providers import BaseProvider
 

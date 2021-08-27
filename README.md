@@ -10,18 +10,18 @@ This will return random data instead of making API requests to Score Saber.
 ### Usage:
 ```python
 import asyncio
-from pyscoresaber import ScoreSaber
+from pyscoresaber import ScoreSaberAPI
 
 
 async def main():
-    async with ScoreSaber() as scoresaber:
-        player = await scoresaber.get_player_full("76561198029447509")
+    async with ScoreSaberAPI() as scoresaber:
+        player = await scoresaber.player_full("76561198029447509")
         print(player)
 
 # Get fake data instead
 async def main_fake():
-    async with ScoreSaber(test_mode=True) as scoresaber:
-        player = await scoresaber.get_player_basic("76561198029447509")
+    async with ScoreSaberAPI(test_mode=True) as scoresaber:
+        player = await scoresaber.player_basic("76561198029447509")
         print(player)
 
 asyncio.run(main())
