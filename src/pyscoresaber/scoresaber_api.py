@@ -1,7 +1,6 @@
 from typing import *
 
 from . import ScoreSaber
-from .errors import ScoreSaberException
 from .models import *
 
 
@@ -16,34 +15,25 @@ class ScoreSaberAPI(ScoreSaber):
 
     async def player_scores_recent_all(self, player_id: str) -> AsyncIterable[List[Score]]:
         page = 0
-
         while True:
-            try:
-                scores = await self.player_scores_recent(player_id, page)
+            recent_scores = await self.player_scores_recent(player_id, page)
 
-                if len(scores) == 0:
-                    break
-
-                yield scores
-
-                page += 1
-
-            except ScoreSaberException:
+            if len(recent_scores) == 0:
                 break
+
+            yield recent_scores
+
+            page += 1
 
     async def player_scores_top_all(self, player_id: str) -> AsyncIterable[List[Score]]:
         page = 0
 
         while True:
-            try:
-                scores = await self.player_scores_top(player_id, page)
+            top_scores = await self.player_scores_top(player_id, page)
 
-                if len(scores) == 0:
-                    break
-
-                yield scores
-
-                page += 1
-
-            except ScoreSaberException:
+            if len(top_scores) == 0:
                 break
+
+            yield top_scores
+
+            page += 1
