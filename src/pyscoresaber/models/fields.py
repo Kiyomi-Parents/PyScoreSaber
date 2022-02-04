@@ -1,9 +1,9 @@
-from dateutil import parser
 from dataclasses import field, Field
 from datetime import datetime
 from typing import Optional
 
 from dataclasses_json import config
+from dateutil import parser
 from marshmallow import fields
 
 from .enum import GameMode, BeatmapDifficulty

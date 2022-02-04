@@ -12,4 +12,3 @@ from .score import Score
 class ScoreCollection:
     scores: List[Score]
     metadata: Metadata
-

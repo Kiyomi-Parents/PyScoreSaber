@@ -29,4 +29,3 @@ class Score:
     hmd: int = default()
     has_replay: bool = default("hasReplay")
     time_set: datetime = datetime_field("timeSet")
-

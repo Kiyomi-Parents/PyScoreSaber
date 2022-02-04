@@ -14,10 +14,9 @@ def event_loop():
 
 @pytest.fixture(scope="session")
 async def scoresaber(event_loop):
-    scoresaber = ScoreSaberAPI(loop=event_loop)
-    await scoresaber.start()
+    scoresaber_api = ScoreSaberAPI(loop=event_loop)
+    await scoresaber_api.start()
 
-    yield scoresaber
+    yield scoresaber_api
 
-    await scoresaber.close()
-
+    await scoresaber_api.close()

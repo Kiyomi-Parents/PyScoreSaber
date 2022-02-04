@@ -4,13 +4,11 @@ import typing
 from asyncio import AbstractEventLoop
 from datetime import datetime
 from enum import Enum
-from pprint import pprint
-from typing import Optional, List
+from typing import Optional
 
 import aiohttp
 from aiohttp import ClientResponse, ClientResponseError
 
-from .models.player import Player
 from .errors import ScoreSaberException, NotFoundException, ServerException
 
 
@@ -51,11 +49,12 @@ class HttpClient:
             except ClientResponseError as error:
                 if error.status == 404:
                     raise NotFoundException(error.status, str(error.request_info.real_url)) from error
-                elif error.status == 500:
+
+                if error.status == 500:
                     raise ServerException(error.status, str(error.request_info.real_url)) from error
-                else:
-                    if retries > self.RETRIES:
-                        raise ScoreSaberException(error.status, str(error.request_info.real_url)) from error
+
+                if retries > self.RETRIES:
+                    raise ScoreSaberException(error.status, str(error.request_info.real_url)) from error
 
             sleep = 2 ** retries
 
@@ -96,7 +95,5 @@ class HttpClient:
                 return data
 
             return type_.from_dict(data)
-        else:
-            return typing.get_args(type_)[0].schema().load(data, many=True)
 
-
+        return typing.get_args(type_)[0].schema().load(data, many=True)

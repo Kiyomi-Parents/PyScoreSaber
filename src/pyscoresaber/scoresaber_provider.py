@@ -113,4 +113,3 @@ class ScoreSaberProvider(BaseProvider):
             scores.append(self.score())
 
         return scores
-

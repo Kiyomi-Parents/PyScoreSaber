@@ -77,14 +77,14 @@ class ScoreSaber:
 
     @CacheAsync(hours=1)
     async def leaderboard_info_by_hash(self,
-        hash: str,
+        beatmap_hash: str,
         difficulty: BeatmapDifficulty,
         game_mode: Optional[GameMode] = None
     ) -> LeaderboardInfo:
         if self.test_mode:
             raise RuntimeError("Not implemented!")
 
-        url = f"{self._url}/leaderboard/by-hash/{hash}/info"
+        url = f"{self._url}/leaderboard/by-hash/{beatmap_hash}/info"
         params = {
             "difficulty": difficulty, "gameMode": game_mode
         }
@@ -110,7 +110,7 @@ class ScoreSaber:
 
     @CacheAsync(hours=1)
     async def leaderboard_scores_by_hash(self,
-        hash: str,
+        beatmap_hash: str,
         difficulty: BeatmapDifficulty,
         countries: Optional[str] = None,
         search: Optional[str] = None,
@@ -120,7 +120,7 @@ class ScoreSaber:
         if self.test_mode:
             raise RuntimeError("Not implemented!")
 
-        url = f"{self._url}/leaderboard/by-hash/{hash}/scores"
+        url = f"{self._url}/leaderboard/by-hash/{beatmap_hash}/scores"
         params = {
             "difficulty": difficulty, "countries": countries, "search": search,
             "page": page, "gameMode": game_mode
@@ -130,12 +130,12 @@ class ScoreSaber:
 
     @CacheAsync(hours=1)
     async def leaderboard_difficulties(self,
-        hash: str
+        beatmap_hash: str
     ) -> List[Difficulty]:
         if self.test_mode:
             raise RuntimeError("Not implemented!")
 
-        return await self._http_client.get(List[Difficulty], f"{self._url}/leaderboard/get-difficulties/{hash}")
+        return await self._http_client.get(List[Difficulty], f"{self._url}/leaderboard/get-difficulties/{beatmap_hash}")
 
     # /player
 
@@ -228,4 +228,3 @@ class ScoreSaber:
     # TODO: Implement POST /ranking/request/action/nat/replace
     # TODO: Implement POST /ranking/request/action/nat/qualify
     # TODO: Implement POST /ranking/request/action/nat/deny
-
