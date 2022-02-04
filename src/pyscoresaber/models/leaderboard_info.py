@@ -34,6 +34,6 @@ class LeaderboardInfo:
     difficulties: Optional[List[Difficulty]]
     max_pp: int = default("maxPP")
     created_date: datetime = datetime_field("createdDate")
-    ranked_date: datetime = datetime_field("rankedDate")
+    ranked_date: Optional[datetime] = datetime_field("rankedDate")
     qualified_date: Optional[datetime] = datetime_field("qualifiedDate")
     loved_date: Optional[datetime] = datetime_field("lovedDate")

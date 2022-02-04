@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 
 from dataclasses_json import dataclass_json
 
@@ -15,4 +16,4 @@ class LeaderBoardPlayer:
     profile_picture: str = default("profilePicture")
     country: str = default()
     permissions: int = default()
-    role: str = default()
+    role: Optional[str] = default()
