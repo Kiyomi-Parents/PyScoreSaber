@@ -1,9 +1,8 @@
-from pprint import pprint
 from typing import List
 
 import pytest
 
-from pyscoresaber import ScoreSaber, ScoreSaberAPI, ScoreSort
+from src.pyscoresaber import ScoreSaber, ScoreSaberAPI, ScoreSort
 
 player_ids = [
     76561198029447509,

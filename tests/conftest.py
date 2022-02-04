@@ -2,10 +2,10 @@ import asyncio
 
 import pytest
 
-from pyscoresaber import ScoreSaberAPI
+from src.pyscoresaber import ScoreSaberAPI
 
 
-@pytest.yield_fixture(scope='session')
+@pytest.fixture(scope='session')
 def event_loop():
     loop = asyncio.get_event_loop_policy().new_event_loop()
     yield loop

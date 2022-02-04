@@ -2,12 +2,12 @@ import json
 
 import pytest
 
-from pyscoresaber import ScoreSaber, BeatmapDifficulty, GameMode
-from pyscoresaber.models.fields import game_mode_decoder, difficulty_decoder
+from src.pyscoresaber import ScoreSaber, BeatmapDifficulty, GameMode
+from src.pyscoresaber.models.fields import game_mode_decoder, difficulty_decoder
 
 
 def get_static_leaderboards():
-    with open("data/leaderboards.json", "r") as file:
+    with open("tests/data/leaderboards.json", "r") as file:
         return json.load(file)
 
 
