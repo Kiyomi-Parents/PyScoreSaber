@@ -13,19 +13,17 @@ from .score_stats import ScoreStats
 class Player:
     """Player data from ScoreSaber"""
 
-    player_id: str = default("playerId")
-    player_name: str = default("playerName")
-    avatar: str = default()
+    id: str
+    name: str = default()
+    profile_picture: str = default("profilePicture")
+    country: str = default()
+    pp: float = default()
     rank: int = default()
     country_rank: Optional[int] = default("countryRank")
-    pp: float = default()
-    country: str = default()
     role: Optional[str] = default()
     badges: Optional[List[Badge]] = default()
-    history: str = default()
-    permissions: Optional[int] = default()
-    inactive: Optional[int] = default()
-    banned: Optional[int] = default()
-    difference: Optional[int] = default()
-
+    histories: str = default()
     score_stats: Optional[ScoreStats] = default("scoreStats")
+    permissions: Optional[int] = default()
+    banned: Optional[int] = default()
+    inactive: Optional[int] = default()

@@ -2,7 +2,7 @@ from typing import *
 
 from faker.providers import BaseProvider
 
-from .models import Player, ScoreStats, Score, Characteristic, Difficulty, Badge
+from .models import Player, ScoreStats, Score, GameMode, BeatmapDifficulty, Badge
 
 
 class ScoreSaberProvider(BaseProvider):
@@ -100,8 +100,8 @@ class ScoreSaberProvider(BaseProvider):
         score.song_sub_name = self.generator.text(35)
         score.song_author_name = self.generator.user_name()
         score.level_author_name = self.generator.user_name()
-        score.characteristic = self.random_choices(list(Characteristic), 1)
-        score.difficulty = self.random_choices(list(Difficulty), 1)
+        score.characteristic = self.random_choices(list(gamemode), 1)
+        score.difficulty = self.random_choices(list(BeatmapDifficulty), 1)
         score.max_score = score.score * float(self.numerify("%.###"))
 
         return score

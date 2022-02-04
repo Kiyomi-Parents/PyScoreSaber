@@ -1,0 +1,173 @@
+[
+  {
+    "id": 330963,
+    "songHash": "BBC011F70D104624EB40ACD3944C2FBFBB30E5B0",
+    "songName": "0verf1ow",
+    "songSubName": "(feat. Luschka & Panaman)",
+    "songAuthorName": "FUZI x Neru ",
+    "levelAuthorName": "Timbo",
+    "difficulty": {
+      "leaderboardId": 330963,
+      "difficulty": 9,
+      "gameMode": "SoloStandard",
+      "difficultyRaw": "_ExpertPlus_SoloStandard"
+    },
+    "maxScore": 1390235,
+    "createdDate": "2021-02-13T18:19:24.000Z",
+    "rankedDate": "2021-02-26T02:20:57.000Z",
+    "qualifiedDate": "2021-02-15T23:10:03.000Z",
+    "lovedDate": null,
+    "ranked": true,
+    "qualified": false,
+    "loved": false,
+    "maxPP": -1,
+    "stars": 9.94,
+    "plays": 2227,
+    "dailyPlays": 7,
+    "positiveModifiers": false,
+    "playerScore": null,
+    "coverImage": "https://cdn.scoresaber.com/covers/BBC011F70D104624EB40ACD3944C2FBFBB30E5B0.png",
+    "difficulties": [
+      {
+        "leaderboardId": 330955,
+        "difficulty": 1,
+        "gameMode": "SoloStandard",
+        "difficultyRaw": "_Easy_SoloStandard"
+      },
+      {
+        "leaderboardId": 330956,
+        "difficulty": 3,
+        "gameMode": "SoloStandard",
+        "difficultyRaw": "_Normal_SoloStandard"
+      },
+      {
+        "leaderboardId": 330957,
+        "difficulty": 5,
+        "gameMode": "SoloStandard",
+        "difficultyRaw": "_Hard_SoloStandard"
+      },
+      {
+        "leaderboardId": 330960,
+        "difficulty": 7,
+        "gameMode": "SoloStandard",
+        "difficultyRaw": "_Expert_SoloStandard"
+      },
+      {
+        "leaderboardId": 330963,
+        "difficulty": 9,
+        "gameMode": "SoloStandard",
+        "difficultyRaw": "_ExpertPlus_SoloStandard"
+      },
+      {
+        "leaderboardId": 331323,
+        "difficulty": 9,
+        "gameMode": "SoloLawless",
+        "difficultyRaw": "_ExpertPlus_SoloLawless"
+      }
+    ]
+  },
+  {
+    "id": 409339,
+    "songHash": "C73978FBD4DA71C765F0538D676A979535012D8A",
+    "songName": "Metamorphose",
+    "songSubName": "",
+    "songAuthorName": "Laur",
+    "levelAuthorName": "Jabob",
+    "difficulty": {
+      "leaderboardId": 409339,
+      "difficulty": 5,
+      "gameMode": "SoloStandard",
+      "difficultyRaw": "_Hard_SoloStandard"
+    },
+    "maxScore": 827195,
+    "createdDate": "2022-01-12T03:54:11.000Z",
+    "rankedDate": "2022-01-27T14:39:36.000Z",
+    "qualifiedDate": null,
+    "lovedDate": null,
+    "ranked": true,
+    "qualified": false,
+    "loved": false,
+    "maxPP": -1,
+    "stars": 6.36,
+    "plays": 397,
+    "dailyPlays": 93,
+    "positiveModifiers": false,
+    "playerScore": null,
+    "coverImage": "https://cdn.scoresaber.com/covers/C73978FBD4DA71C765F0538D676A979535012D8A.png",
+    "difficulties": [
+      {
+        "leaderboardId": 409340,
+        "difficulty": 1,
+        "gameMode": "SoloStandard",
+        "difficultyRaw": "_Easy_SoloStandard"
+      },
+      {
+        "leaderboardId": 409342,
+        "difficulty": 3,
+        "gameMode": "SoloStandard",
+        "difficultyRaw": "_Normal_SoloStandard"
+      },
+      {
+        "leaderboardId": 409339,
+        "difficulty": 5,
+        "gameMode": "SoloStandard",
+        "difficultyRaw": "_Hard_SoloStandard"
+      },
+      {
+        "leaderboardId": 409343,
+        "difficulty": 7,
+        "gameMode": "SoloStandard",
+        "difficultyRaw": "_Expert_SoloStandard"
+      },
+      {
+        "leaderboardId": 409345,
+        "difficulty": 9,
+        "gameMode": "SoloStandard",
+        "difficultyRaw": "_ExpertPlus_SoloStandard"
+      }
+    ]
+  },
+  {
+    "id": 409012,
+    "songHash": "B87A80768663E3528DF0AB0EE47BD8D23D5E41FD",
+    "songName": "Feral",
+    "songSubName": "",
+    "songAuthorName": "meganeko",
+    "levelAuthorName": "abcbadq",
+    "difficulty": {
+      "leaderboardId": 409012,
+      "difficulty": 9,
+      "gameMode": "SoloStandard",
+      "difficultyRaw": "_ExpertPlus_SoloStandard"
+    },
+    "maxScore": 1756395,
+    "createdDate": "2022-01-11T02:12:57.000Z",
+    "rankedDate": "2022-01-27T14:38:38.000Z",
+    "qualifiedDate": null,
+    "lovedDate": null,
+    "ranked": true,
+    "qualified": false,
+    "loved": false,
+    "maxPP": -1,
+    "stars": 10.52,
+    "plays": 78,
+    "dailyPlays": 12,
+    "positiveModifiers": false,
+    "playerScore": null,
+    "coverImage": "https://cdn.scoresaber.com/covers/B87A80768663E3528DF0AB0EE47BD8D23D5E41FD.png",
+    "difficulties": [
+      {
+        "leaderboardId": 409014,
+        "difficulty": 7,
+        "gameMode": "SoloStandard",
+        "difficultyRaw": "_Expert_SoloStandard"
+      },
+      {
+        "leaderboardId": 409012,
+        "difficulty": 9,
+        "gameMode": "SoloStandard",
+        "difficultyRaw": "_ExpertPlus_SoloStandard"
+      }
+    ]
+  }
+]

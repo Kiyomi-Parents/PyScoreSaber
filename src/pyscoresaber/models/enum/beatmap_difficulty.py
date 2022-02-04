@@ -1,7 +1,7 @@
 from .base_enum import BaseEnum
 
 
-class Difficulty(BaseEnum):
+class BeatmapDifficulty(BaseEnum):
     EASY = 1
     NORMAL = 3
     HARD = 5

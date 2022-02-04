@@ -15,3 +15,4 @@ class ScoreStats:
     average_ranked_accuracy: float = default("averageRankedAccuracy")
     total_play_count: int = default("totalPlayCount")
     ranked_play_count: int = default("rankedPlayCount")
+    replays_watched: int = default("replaysWatched")

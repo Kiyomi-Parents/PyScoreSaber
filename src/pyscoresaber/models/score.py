@@ -1,10 +1,11 @@
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Optional
 
 from dataclasses_json import dataclass_json
 
-from .enum import Characteristic, Difficulty
-from .fields import datetime_field, default, characteristic_field, difficulty_field
+from .fields import datetime_field, default
+from .leaderboard_player import LeaderBoardPlayer
 
 
 @dataclass_json
@@ -12,20 +13,20 @@ from .fields import datetime_field, default, characteristic_field, difficulty_fi
 class Score:
     """Score data from ScoreSaber"""
 
+    id: int = default()
+    leaderboard_player_info: Optional[LeaderBoardPlayer] = default("leaderboardPlayerInfo")
     rank: int = default()
-    score_id: int = default("scoreId")
-    score: int = default()
-    unmodified_score: int = default("unmodififiedScore")
-    mods: str = default()
+    base_score: int = default("baseScore")
+    modified_score: int = default("modifiedScore")
     pp: float = default()
     weight: float = default()
+    modifiers: str = default()
+    multiplier: int = default()
+    bad_cuts: int = default("badCuts")
+    missed_notes: int = default("missedNotes")
+    max_combo: int = default("maxCombo")
+    full_combo: bool = default("fullCombo")
+    hmd: int = default()
+    has_replay: bool = default("hasReplay")
     time_set: datetime = datetime_field("timeSet")
-    leaderboard_id: int = default("leaderboardId")
-    song_hash: str = default("songHash")
-    song_name: str = default("songName")
-    song_sub_name: str = default("songSubName")
-    song_author_name: str = default("songAuthorName")
-    level_author_name: str = default("levelAuthorName")
-    characteristic: Characteristic = characteristic_field("difficultyRaw")
-    difficulty: Difficulty = difficulty_field("difficulty")
-    max_score: int = default("maxScore")
+

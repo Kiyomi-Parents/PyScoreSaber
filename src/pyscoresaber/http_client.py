@@ -1,11 +1,16 @@
 import asyncio
 import logging
+import typing
 from asyncio import AbstractEventLoop
-from typing import Optional
+from datetime import datetime
+from enum import Enum
+from pprint import pprint
+from typing import Optional, List
 
 import aiohttp
 from aiohttp import ClientResponse, ClientResponseError
 
+from .models.player import Player
 from .errors import ScoreSaberException, NotFoundException, ServerException
 
 
@@ -59,7 +64,39 @@ class HttpClient:
 
             retries += 1
 
-    async def get(self, type_, url, *args, **kwargs):
-        response = await self._request('GET', url, *args, **kwargs)
+    def _format_params(self, params):
+
+        for key, value in params.copy().items():
+            if value is None:
+                del params[key]
+                continue
+
+            params[key] = self._format_value(value)
+
+        return params
+
+    @staticmethod
+    def _format_value(value):
+        if isinstance(value, datetime):
+            return 1000 * int(value.timestamp())
+
+        if isinstance(value, Enum):
+            return value.value
+
+        return value
+
+    async def get(self, type_, url, params={}, *args, **kwargs):
+        params = self._format_params(params)
+
+        response = await self._request('GET', url, params=params, *args, **kwargs)
         data = await response.json()
-        return type_.from_dict(data)
+
+        if not typing.get_args(type_):
+            if isinstance(data, int):
+                return data
+
+            return type_.from_dict(data)
+        else:
+            return typing.get_args(type_)[0].schema().load(data, many=True)
+
+

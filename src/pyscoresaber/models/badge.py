@@ -8,5 +8,5 @@ from .fields import default
 @dataclass_json
 @dataclass
 class Badge:
-    image: str = default()
     description: str = default()
+    image: str = default()

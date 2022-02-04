@@ -6,7 +6,7 @@ from typing import Optional
 from dataclasses_json import config
 from marshmallow import fields
 
-from .enum import Characteristic, Difficulty
+from .enum import GameMode, BeatmapDifficulty
 
 
 def datetime_from_iso_format(time):
@@ -37,46 +37,44 @@ def datetime_field(json_field_name: Optional[str] = None) -> Field:
     )
 
 
-def characteristic_decoder(value: any) -> Characteristic:
-    if Characteristic.has_value(value):
-        return Characteristic(value)
-
-    res = value[1:].split("_")[1].replace("Solo", "")
+def game_mode_decoder(value: any) -> GameMode:
+    if GameMode.has_value(value):
+        return GameMode(value)
 
     # Some weird "StandardHM" characteristic that doesnt exist anymore
-    if "Standard" in res:
-        return Characteristic.STANDARD
+    if "Standard" in value:
+        return GameMode.STANDARD
 
-    if Characteristic.has_value(res):
-        return Characteristic(res)
+    if GameMode.has_value(value):
+        return GameMode(value)
 
-    return Characteristic.UNKNOWN
-
-
-def characteristic_encoder(characteristic: Characteristic) -> str:
-    return characteristic[0].value
+    return GameMode.UNKNOWN
 
 
-def characteristic_field(json_field_name: Optional[str] = None) -> Field:
+def game_mode_encoder(game_mode: GameMode) -> str:
+    return game_mode.value
+
+
+def game_mode_field(json_field_name: Optional[str] = None) -> Field:
     return field(
         default=None,
         metadata=config(
-            encoder=characteristic_encoder,
-            decoder=characteristic_decoder,
+            encoder=game_mode_encoder,
+            decoder=game_mode_decoder,
             field_name=json_field_name
         )
     )
 
 
-def difficulty_decoder(value: any) -> Difficulty:
-    if Difficulty.has_value(value):
-        return Difficulty(value)
+def difficulty_decoder(value: any) -> BeatmapDifficulty:
+    if BeatmapDifficulty.has_value(value):
+        return BeatmapDifficulty(value)
 
-    return Difficulty.UNKNOWN
+    return BeatmapDifficulty.UNKNOWN
 
 
-def difficulty_encoder(difficulty: Difficulty) -> int:
-    return difficulty[0].value
+def difficulty_encoder(beatmap_difficulty: BeatmapDifficulty) -> int:
+    return beatmap_difficulty.value
 
 
 def difficulty_field(json_field_name: Optional[str] = None) -> Field:

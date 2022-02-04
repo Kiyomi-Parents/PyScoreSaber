@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="PyScoreSaber",
-    version="0.1.3",
+    version="1.0.0",
     author="LuCkEr-",
     author_email="lucker@lucker.xyz",
     description="Score Saber API client",

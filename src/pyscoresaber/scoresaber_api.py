@@ -1,39 +1,29 @@
+import math
 from typing import *
 
-from . import ScoreSaber
+from .scoresaber import ScoreSaber
 from .models import *
 
 
 class ScoreSaberAPI(ScoreSaber):
-    async def players_basic(self, player_ids: List[str]) -> AsyncIterable[Player]:
+    async def players_basic(self, player_ids: List[int]) -> AsyncIterable[Player]:
         for player_id in player_ids:
             yield await self.player_basic(player_id)
 
-    async def players_full(self, player_ids: List[str]) -> AsyncIterable[Player]:
+    async def players_full(self, player_ids: List[int]) -> AsyncIterable[Player]:
         for player_id in player_ids:
             yield await self.player_full(player_id)
 
-    async def player_scores_recent_all(self, player_id: str) -> AsyncIterable[List[Score]]:
+    async def player_scores_all(self, player_id: int, score_sort: ScoreSort) -> AsyncIterable[List[Score]]:
         page = 0
-        while True:
-            recent_scores = await self.player_scores_recent(player_id, page)
+        max_page = -1
 
-            if len(recent_scores) == 0:
-                break
+        while page < max_page or max_page == -1:
+            recent_scores = await self.player_scores(player_id, sort=score_sort, limit=100, page=page)
 
-            yield recent_scores
+            if max_page == -1:
+                max_page = math.ceil(recent_scores.metadata.total / 100) + 1
 
-            page += 1
-
-    async def player_scores_top_all(self, player_id: str) -> AsyncIterable[List[Score]]:
-        page = 0
-
-        while True:
-            top_scores = await self.player_scores_top(player_id, page)
-
-            if len(top_scores) == 0:
-                break
-
-            yield top_scores
+            yield recent_scores.player_scores
 
             page += 1
