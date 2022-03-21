@@ -15,7 +15,7 @@ class ScoreSaberAPI(ScoreSaber):
             yield await self.player_full(player_id)
 
     async def player_scores_all(self, player_id: int, score_sort: ScoreSort) -> AsyncIterable[List[PlayerScore]]:
-        page = 0
+        page = 1
         max_page = -1
 
         while page < max_page or max_page == -1:
