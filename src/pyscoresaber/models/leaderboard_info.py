@@ -25,7 +25,7 @@ class LeaderboardInfo:
     ranked: bool
     qualified: bool
     loved: bool
-    stars: int
+    stars: float
     positive_modifiers: bool
     plays: int
     daily_plays: int

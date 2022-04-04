@@ -64,7 +64,6 @@ class HttpClient:
             retries += 1
 
     def _format_params(self, params):
-
         for key, value in params.copy().items():
             if value is None:
                 del params[key]
