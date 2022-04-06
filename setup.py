@@ -10,7 +10,7 @@ with open("requirements.txt") as f:
 
 setuptools.setup(
     name="PyScoreSaber",
-    version="1.0.0",
+    version="1.0.1",
     author="LuCkEr-",
     author_email="lucker@lucker.xyz",
     description="Score Saber API client",
