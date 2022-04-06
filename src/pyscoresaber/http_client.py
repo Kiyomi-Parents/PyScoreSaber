@@ -13,7 +13,7 @@ from .errors import ScoreSaberException, NotFoundException, ServerException
 
 
 class HttpClient:
-    RETRIES = 10
+    MAX_TIMEOUT = 60
 
     def __init__(self, loop: Optional[AbstractEventLoop] = None):
         self.loop = loop
@@ -53,12 +53,12 @@ class HttpClient:
                 if error.status == 500:
                     raise ServerException(error.status, str(error.request_info.real_url)) from error
 
-                if retries > self.RETRIES:
-                    raise ScoreSaberException(error.status, str(error.request_info.real_url)) from error
+            sleep = 10 * retries
 
-            sleep = 2 ** retries
+            if sleep > 60:
+                sleep = 60
 
-            logging.warning(f"[{retries}/{self.RETRIES}] Rate limited! Waiting {sleep} seconds...")
+            logging.warning(f"Request failed! Waiting {sleep} seconds...")
             await asyncio.sleep(sleep)
 
             retries += 1
