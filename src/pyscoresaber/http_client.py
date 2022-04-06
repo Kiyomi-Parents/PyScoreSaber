@@ -55,7 +55,7 @@ class HttpClient:
 
             sleep = 10 * retries
 
-            if sleep > 60:
+            if sleep > self.MAX_TIMEOUT:
                 sleep = 60
 
             logging.warning(f"Request failed! Waiting {sleep} seconds...")
