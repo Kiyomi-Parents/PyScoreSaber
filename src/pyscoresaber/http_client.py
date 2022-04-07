@@ -50,9 +50,6 @@ class HttpClient:
                 if error.status == 404:
                     raise NotFoundException(error.status, str(error.request_info.real_url)) from error
 
-                if error.status == 500:
-                    raise ServerException(error.status, str(error.request_info.real_url)) from error
-
             sleep = 10 * retries
 
             if sleep > self.MAX_TIMEOUT:
