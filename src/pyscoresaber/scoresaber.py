@@ -40,7 +40,7 @@ class ScoreSaber:
         await self.close()
 
     async def ws_start(self):
-        await self._http_client.ws_connect("ws://scoresaber.com/ws")
+        await self._http_client.ws_connect()
 
     async def ws_close(self):
         await self._http_client.ws_close()

@@ -14,13 +14,13 @@ from .errors import ScoreSaberException, NotFoundException
 
 
 class HttpClient:
+    _ws_url = "ws://scoresaber.com/ws"
     MAX_TIMEOUT = 60
 
     def __init__(self, loop: Optional[AbstractEventLoop] = None):
         self.loop = loop
         self._aiohttp: Optional[ClientSession] = None
         self._ws: Optional[ClientWebSocketResponse] = None
-        self._ws_url: Optional[str] = None
 
     async def start(self):
         if self._aiohttp is None:
@@ -63,10 +63,9 @@ class HttpClient:
 
             retries += 1
 
-    async def ws_connect(self, url: str):
+    async def ws_connect(self):
         if self._ws is None:
-            self._ws_url = url
-            self._ws = await self._aiohttp.ws_connect(url)
+            self._ws = await self._aiohttp.ws_connect(self._ws_url)
 
     async def ws_close(self):
         if self._ws is not None:
@@ -74,10 +73,13 @@ class HttpClient:
             self._ws = None
 
     async def ws_listen(self) -> AsyncIterable[typing.Dict]:
+        if self._ws is None:
+            await self.ws_connect()
+
         async for message in self._ws:
             if message.type == aiohttp.WSMsgType.CLOSE:
                 logging.warning(f"Websocket closed! Reconnecting...")
-                await self.ws_connect(self._ws_url)
+                await self.ws_connect()
             if message.type == aiohttp.WSMsgType.TEXT:
                 text = message.data
 
