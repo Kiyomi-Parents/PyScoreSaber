@@ -10,10 +10,10 @@ with open("requirements.txt", "r", encoding="utf-8") as f:
 
 setuptools.setup(
     name="PyScoreSaber",
-    version="1.0.3",
+    version="1.0.4",
     author="LuCkEr-",
     author_email="lucker@lucker.xyz",
-    description="Score Saber API client",
+    description="Score Saber API wrapper",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Kiyomi-Parents/PyScoreSaber",

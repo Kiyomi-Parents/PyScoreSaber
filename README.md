@@ -1,6 +1,6 @@
 [![PyPI version](https://badge.fury.io/py/PyScoreSaber.svg)](https://pypi.org/project/PyScoreSaber)
 # PyScoreSaber
-Score Saber API client
+Score Saber API wrapper
 
 Comes with caching and rate limiting out of the box.
 
