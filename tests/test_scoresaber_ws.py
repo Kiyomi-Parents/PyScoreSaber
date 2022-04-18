@@ -1,4 +1,4 @@
-from pyscoresaber import ScoreSaber
+from src.pyscoresaber import ScoreSaber
 
 
 async def test_websocket_live_feed(scoresaber: ScoreSaber):
