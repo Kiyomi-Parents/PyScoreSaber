@@ -1,7 +1,13 @@
+from typing import Optional
+
 import setuptools
 
 # Get version info
+__version__: Optional[str] = None
 exec(open('src/pyscoresaber/version.py').read())
+
+if __version__ is None:
+    raise RuntimeError("Failed to get version!")
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
