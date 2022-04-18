@@ -11,10 +11,13 @@ import aiohttp
 from aiohttp import ClientResponse, ClientResponseError, ClientSession, ClientWebSocketResponse, WSMessage
 
 from .errors import ScoreSaberException, NotFoundException
-
+from .version import __version__
 
 class HttpClient:
     _ws_url = "ws://scoresaber.com/ws"
+    _headers = {
+        'User-Agent': f'PyScoreSaber/{__version__}'
+    }
     MAX_TIMEOUT = 60
 
     def __init__(self, loop: Optional[AbstractEventLoop] = None):

@@ -1,5 +1,8 @@
 import setuptools
 
+# Get version info
+exec(open('src/pyscoresaber/version.py').read())
+
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
@@ -10,7 +13,7 @@ with open("requirements.txt", "r", encoding="utf-8") as f:
 
 setuptools.setup(
     name="PyScoreSaber",
-    version="1.0.5",
+    version=__version__,
     author="LuCkEr-",
     author_email="lucker@lucker.xyz",
     description="Score Saber API wrapper",
