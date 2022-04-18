@@ -39,6 +39,19 @@ class ScoreSaber:
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         await self.close()
 
+    async def ws_start(self):
+        await self._http_client.ws_connect("ws://scoresaber.com/ws")
+
+    async def ws_close(self):
+        await self._http_client.ws_close()
+
+    # /ws
+
+    async def websocket(self) -> AsyncIterable[Union[PlayerScore]]:
+        async for message in self._http_client.ws_listen():
+            if message["commandName"] == "score":
+                yield PlayerScore.from_dict(message["commandData"])
+
     # /leaderboard
 
     @CacheAsync(hours=1)

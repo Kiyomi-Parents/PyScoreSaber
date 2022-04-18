@@ -1,15 +1,16 @@
 import asyncio
+import json
 import logging
 import typing
 from asyncio import AbstractEventLoop
 from datetime import datetime
 from enum import Enum
-from typing import Optional
+from typing import Optional, AsyncIterable
 
 import aiohttp
-from aiohttp import ClientResponse, ClientResponseError
+from aiohttp import ClientResponse, ClientResponseError, ClientSession, ClientWebSocketResponse, WSMessage
 
-from .errors import ScoreSaberException, NotFoundException, ServerException
+from .errors import ScoreSaberException, NotFoundException
 
 
 class HttpClient:
@@ -17,7 +18,9 @@ class HttpClient:
 
     def __init__(self, loop: Optional[AbstractEventLoop] = None):
         self.loop = loop
-        self._aiohttp = None
+        self._aiohttp: Optional[ClientSession] = None
+        self._ws: Optional[ClientWebSocketResponse] = None
+        self._ws_url: Optional[str] = None
 
     async def start(self):
         if self._aiohttp is None:
@@ -59,6 +62,29 @@ class HttpClient:
             await asyncio.sleep(sleep)
 
             retries += 1
+
+    async def ws_connect(self, url: str):
+        if self._ws is None:
+            self._ws_url = url
+            self._ws = await self._aiohttp.ws_connect(url)
+
+    async def ws_close(self):
+        if self._ws is not None:
+            await self._ws.close()
+            self._ws = None
+
+    async def ws_listen(self) -> AsyncIterable[typing.Dict]:
+        async for message in self._ws:
+            if message.type == aiohttp.WSMsgType.CLOSE:
+                logging.warning(f"Websocket closed! Reconnecting...")
+                await self.ws_connect(self._ws_url)
+            if message.type == aiohttp.WSMsgType.TEXT:
+                text = message.data
+
+                if text == "Connected to the ScoreSaber WSS":
+                    continue
+
+            yield message.json()
 
     def _format_params(self, params):
         for key, value in params.copy().items():
