@@ -1,10 +1,19 @@
+[![GitHub license](https://img.shields.io/github/license/Kiyomi-Parents/PyScoreSaber)](https://github.com/Kiyomi-Parents/PyScoreSaber/blob/master/LICENSE)
 [![PyPI version](https://badge.fury.io/py/PyScoreSaber.svg)](https://pypi.org/project/PyScoreSaber)
+[![codecov](https://codecov.io/gh/Kiyomi-Parents/PyScoreSaber/branch/master/graph/badge.svg?token=X2LFJL839M)](https://codecov.io/gh/Kiyomi-Parents/PyScoreSaber)
+[![PyPI supported Python versions](https://img.shields.io/pypi/pyversions/pyscoresaber.svg)](https://pypi.org/project/PyScoreSaber)
+[![PyPI downloads](https://img.shields.io/pypi/dm/pyscoresaber?color=blueviolet&logo=pypi)](https://pypi.org/project/PyScoreSaber)
 # PyScoreSaber
 Score Saber API wrapper
 
-Comes with caching and rate limiting out of the box.
+### Features
+* Rate Limit handling
+* Query Caching
+* Everything is ``async``
+* Additional helper methods and async generators
+* Faker data provider
 
-There is also a test mode which can be enabled like this ```scoresaber = ScoreSaber(test_mode=True)```.
+The faker data mode can be activated with the following ```scoresaber = ScoreSaber(test_mode=True)```.
 This will return random data instead of making API requests to Score Saber.
 
 ### Usage:
