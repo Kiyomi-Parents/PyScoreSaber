@@ -13,6 +13,7 @@ from aiohttp import ClientResponse, ClientResponseError, ClientSession, ClientWe
 from .errors import ScoreSaberException, NotFoundException
 from .version import __version__
 
+
 class HttpClient:
     _ws_url = "ws://scoresaber.com/ws"
     _headers = {
@@ -27,7 +28,7 @@ class HttpClient:
 
     async def start(self):
         if self._aiohttp is None:
-            self._aiohttp = aiohttp.ClientSession(loop=self.loop, raise_for_status=True)
+            self._aiohttp = aiohttp.ClientSession(loop=self.loop, headers=self._headers, raise_for_status=True)
 
     async def close(self):
         if self._aiohttp is not None:
