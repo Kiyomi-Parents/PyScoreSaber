@@ -13,6 +13,8 @@ from aiohttp import ClientResponse, ClientResponseError, ClientSession, ClientWe
 from .errors import ScoreSaberException, NotFoundException
 from .version import __version__
 
+_logger = logging.getLogger(__name__)
+
 
 class HttpClient:
     _ws_url = "ws://scoresaber.com/ws"
@@ -54,15 +56,18 @@ class HttpClient:
 
                 raise ScoreSaberException(response.status, str(response.real_url))
             except ClientResponseError as error:
-                if error.status == 404:
-                    raise NotFoundException(error.status, str(error.request_info.real_url)) from error
+                status = error.status
+                real_url = str(error.request_info.real_url)
+
+                if status == 404:
+                    raise NotFoundException(status, real_url) from error
 
             sleep = 10 * retries
 
             if sleep > self.MAX_TIMEOUT:
                 sleep = 60
 
-            logging.warning(f"Request failed! Waiting {sleep} seconds...")
+            _logger.warning(f"[{status}] Request failed! Waiting {sleep} seconds...")
             await asyncio.sleep(sleep)
 
             retries += 1
@@ -82,7 +87,7 @@ class HttpClient:
 
         async for message in self._ws:
             if message.type == aiohttp.WSMsgType.CLOSE:
-                logging.warning(f"Websocket closed! Reconnecting...")
+                _logger.warning(f"Websocket closed! Reconnecting...")
                 await self.ws_connect()
             if message.type == aiohttp.WSMsgType.TEXT:
                 text = message.data

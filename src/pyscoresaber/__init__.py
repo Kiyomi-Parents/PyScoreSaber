@@ -7,4 +7,4 @@ from .errors import *
 from .models import *
 from .version import __version__
 
-logging.getLogger("PyScoreSaber").addHandler(logging.NullHandler())
+logging.getLogger("pyscoresaber").addHandler(logging.NullHandler())

@@ -10,6 +10,8 @@ from .http_client import HttpClient
 from .models import *
 from .scoresaber_provider import ScoreSaberProvider
 
+_logger = logging.getLogger(__name__)
+
 
 class ScoreSaber:
     _url = "https://scoresaber.com/api"
@@ -18,10 +20,10 @@ class ScoreSaber:
         self.loop = loop if loop is not None else asyncio.get_event_loop()
         self.test_mode = test_mode
 
-        self.log = logging.getLogger(__name__)
         self._http_client = HttpClient(self.loop)
 
         if test_mode:
+            _logger.info("Running in test mode")
             self.faker = Faker()
             Faker.seed(76561198283584459)
             self.faker.add_provider(ScoreSaberProvider)
