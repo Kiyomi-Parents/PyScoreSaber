@@ -7,6 +7,6 @@ class GameMode(BaseEnum):
     NO_ARROWS = "NoArrows"
     DEGREE_90 = "90Degree"
     DEGREE_360 = "360Degree"
-    LIGHTSHOW = "Lightshow"
+    LIGHTSHOW = "SoloLightshow"
     LAWLESS = "SoloLawless"
     UNKNOWN = "Unknown"
