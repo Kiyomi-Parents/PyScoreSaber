@@ -1,6 +1,6 @@
 python-dateutil~=2.8.2
 OutCache==1.0.1
-marshmallow~=3.18.0
+marshmallow~=3.19.0
 dataclasses-json~=0.5.7
 aiohttp~=3.8.3
 Faker==13.15.0
